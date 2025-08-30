@@ -17,7 +17,20 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
+
+  nixpkgs.config.allowUnfree = true;
+
   home.packages = [
+
+    # basic utilities
+    pkgs.neofetch
+    pkgs.ntfs3g
+    #pkgs.easyeffects
+    pkgs.protonvpn-gui
+
+    # Development softwares
+    pkgs.rustup
+
     # Internet Browser
     pkgs.chromium
     
@@ -28,8 +41,8 @@
     pkgs.kdePackages.okular
     
     # Editors/ide
-    pkgs.zed
-    #pkgs.vscode # flatpak implementation
+    #pkgs.zed-editor
+    pkgs.vscode # flatpak implementation
     pkgs.nano
     pkgs.android-studio
     
@@ -42,7 +55,7 @@
     
     # System Monitoring/settings
     pkgs.wezterm
-    pkgs.warp-terminal
+    #pkgs.warp-terminal
     pkgs.btop
     
     # # It is sometimes useful to fine-tune packages, for example, by applying
@@ -92,6 +105,7 @@
   #
   home.sessionVariables = {
     # EDITOR = "emacs";
+    GTK_USE_PORTAL=1;
   };
 
   # Let Home Manager install and manage itself.
