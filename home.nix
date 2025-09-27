@@ -25,7 +25,7 @@
     # basic utilities
     pkgs.neofetch
     pkgs.ntfs3g
-    #pkgs.easyeffects
+    pkgs.easyeffects 
     pkgs.protonvpn-gui
 
     # Development softwares
@@ -37,11 +37,11 @@
     # Utilities
     pkgs.digikam
     pkgs.discord
-    pkgs.ollama
+    pkgs.ollama # for fun
     pkgs.kdePackages.okular
     
     # Editors/ide
-    #pkgs.zed-editor
+    #pkgs.zed-editor # doesn't start even after using terminal to manually start
     pkgs.vscode # flatpak implementation
     pkgs.nano
     pkgs.android-studio
@@ -54,8 +54,8 @@
     pkgs.obsidian
     
     # System Monitoring/settings
-    pkgs.wezterm
-    #pkgs.warp-terminal
+    # pkgs.wezterm # getting frontend error just like warp-terminal
+    # pkgs.warp-terminal
     pkgs.btop
     
     # # It is sometimes useful to fine-tune packages, for example, by applying
