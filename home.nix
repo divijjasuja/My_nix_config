@@ -27,6 +27,7 @@
     pkgs.ntfs3g
     pkgs.easyeffects 
     pkgs.protonvpn-gui
+    pkgs.uv
 
     # Development softwares
     pkgs.rustup
@@ -39,6 +40,8 @@
     pkgs.discord
     pkgs.ollama # for fun
     pkgs.kdePackages.okular
+    pkgs.anki-bin
+    pkgs.tree
     
     # Editors/ide
     #pkgs.zed-editor # doesn't start even after using terminal to manually start
@@ -54,7 +57,7 @@
     pkgs.obsidian
     
     # System Monitoring/settings
-    # pkgs.wezterm # getting frontend error just like warp-terminal
+    pkgs.wezterm # getting frontend error just like warp-terminal
     # pkgs.warp-terminal
     pkgs.btop
     
