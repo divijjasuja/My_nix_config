@@ -40,7 +40,6 @@
     pkgs.discord
     pkgs.ollama # for fun
     pkgs.kdePackages.okular
-    pkgs.anki-bin
     pkgs.tree
     
     # Editors/ide
@@ -51,7 +50,8 @@
     
     # Development Platform/Programming Languages
     pkgs.flutter
-    pkgs.cmake
+    #pkgs.cmake
+    #pkgs.glfw
     
     # Note Making
     pkgs.obsidian
@@ -110,7 +110,12 @@
     # EDITOR = "emacs";
     GTK_USE_PORTAL=1;
   };
+  targets.genericLinux.enable = true;
+
+  # Optional explicitly (but not needed)
+  targets.genericLinux.gpu.enable = true;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
 }
