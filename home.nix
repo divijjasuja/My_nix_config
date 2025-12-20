@@ -22,15 +22,22 @@
 
   home.packages = [
 
+    # Hyprland required packages i use
+    pkgs.hyprpaper
+    pkgs.swww #both for wallpaper
+    pkgs.networkmanagerapplet # Network Manager applet
+    pkgs.waybar # Status Bar
+    pkgs.font-awesome
+    pkgs.cliphist # clipboard
+    pkgs.lxqt.lxqt-policykit # Authentication
+    
+    
     # basic utilities
     pkgs.neofetch
     pkgs.ntfs3g
     pkgs.easyeffects 
     pkgs.protonvpn-gui
     pkgs.uv
-
-    # Development softwares
-    pkgs.rustup
 
     # Internet Browser
     pkgs.chromium
@@ -43,23 +50,27 @@
     pkgs.tree
     
     # Editors/ide
-    #pkgs.zed-editor # doesn't start even after using terminal to manually start
+    pkgs.zed-editor
     pkgs.vscode # flatpak implementation
     pkgs.nano
     pkgs.android-studio
     
     # Development Platform/Programming Languages
     pkgs.flutter
+    pkgs.rustup
     #pkgs.cmake
     #pkgs.glfw
     
     # Note Making
     pkgs.obsidian
     
-    # System Monitoring/settings
-    pkgs.wezterm # getting frontend error just like warp-terminal
+    # System Monitoring/terminal
+    pkgs.btop
+    pkgs.wezterm
     # pkgs.warp-terminal
     pkgs.btop
+
+    pkgs.solaar
     
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -109,6 +120,7 @@
   home.sessionVariables = {
     # EDITOR = "emacs";
     GTK_USE_PORTAL=1;
+    CHROMIUM_EXECUTABLE="home/divij/.nix-profile/bin/chromium";
   };
   targets.genericLinux.enable = true;
 
