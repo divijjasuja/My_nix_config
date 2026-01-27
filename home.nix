@@ -30,14 +30,21 @@
     pkgs.font-awesome
     pkgs.cliphist # clipboard
     pkgs.lxqt.lxqt-policykit # Authentication
+    pkgs.hyprlock # Lock Screen
     
     
     # basic utilities
     pkgs.neofetch
     pkgs.ntfs3g
-    pkgs.easyeffects 
     pkgs.protonvpn-gui
     pkgs.uv
+    # pkgs.github-desktop # Will try out later
+    
+    # Media player/audio/image viewer
+    pkgs.haruna
+    pkgs.easyeffects
+    pkgs.gimp
+    pkgs.blender # Maybe Someday
 
     # Internet Browser
     pkgs.chromium
@@ -67,7 +74,7 @@
     # System Monitoring/terminal
     pkgs.btop
     pkgs.wezterm
-    # pkgs.warp-terminal
+    #pkgs.warp-terminal
     pkgs.btop
 
     pkgs.solaar
