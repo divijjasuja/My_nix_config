@@ -34,11 +34,13 @@
     
     
     # basic utilities
-    pkgs.neofetch
+    # pkgs.neofetch
     pkgs.ntfs3g
-    pkgs.protonvpn-gui
+    pkgs.proton-vpn
     pkgs.uv
-    # pkgs.github-desktop # Will try out later
+    pkgs.rquickshare
+    pkgs.github-desktop # Will try out later
+    pkgs.simple-scan
     
     # Media player/audio/image viewer
     pkgs.haruna
@@ -55,12 +57,15 @@
     pkgs.ollama # for fun
     pkgs.kdePackages.okular
     pkgs.tree
+    pkgs.anydesk
     
     # Editors/ide
     pkgs.zed-editor
     pkgs.vscode # flatpak implementation
     pkgs.nano
     pkgs.android-studio
+    pkgs.code-cursor
+    pkgs.thonny
     
     # Development Platform/Programming Languages
     pkgs.flutter
@@ -76,8 +81,9 @@
     pkgs.wezterm
     #pkgs.warp-terminal
     pkgs.btop
+    pkgs.gparted
 
-    pkgs.solaar
+    pkgs.piper
     
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
