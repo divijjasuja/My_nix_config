@@ -70,8 +70,8 @@
     # Development Platform/Programming Languages
     pkgs.flutter
     pkgs.rustup
-    #pkgs.cmake
-    #pkgs.glfw
+    pkgs.cmake
+    pkgs.glfw
     
     # Note Making
     pkgs.obsidian
