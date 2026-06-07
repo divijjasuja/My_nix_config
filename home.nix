@@ -54,7 +54,8 @@
     # Utilities
     pkgs.digikam
     pkgs.discord
-    pkgs.ollama # for fun
+    # pkgs.ollama # for fun
+    pkgs.lmstudio
     pkgs.kdePackages.okular
     pkgs.tree
     pkgs.anydesk
@@ -84,6 +85,13 @@
     pkgs.gparted
 
     pkgs.piper
+    
+    # Password Manager
+    pkgs.proton-pass
+    pkgs.ente-auth
+
+    # Music
+    pkgs.spotify    
     
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
