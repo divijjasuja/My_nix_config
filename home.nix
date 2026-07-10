@@ -24,7 +24,7 @@
 
     # Hyprland required packages i use
     pkgs.hyprpaper
-    pkgs.swww #both for wallpaper
+    pkgs.awww #both for wallpaper
     pkgs.networkmanagerapplet # Network Manager applet
     pkgs.waybar # Status Bar
     pkgs.font-awesome
@@ -59,6 +59,7 @@
     pkgs.kdePackages.okular
     pkgs.tree
     pkgs.anydesk
+    pkgs.thunderbird
     
     # Editors/ide
     pkgs.zed-editor
@@ -67,6 +68,7 @@
     pkgs.android-studio
     pkgs.code-cursor
     pkgs.thonny
+    pkgs.texliveFull
     
     # Development Platform/Programming Languages
     pkgs.flutter
@@ -82,7 +84,7 @@
     pkgs.wezterm
     #pkgs.warp-terminal
     pkgs.btop
-    pkgs.gparted
+    #pkgs.gparted
 
     pkgs.piper
     
