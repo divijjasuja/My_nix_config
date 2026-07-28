@@ -1,6 +1,15 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
+  xdg.systemDirs.data = [ "${config.xdg.dataHome}/nix-desktop-files" ];
+  
+  home.activation.linkDesktopApplications = lib.hm.dag.entryAfter [ "writeBoundary" "createXdgUserDirectories" ] ''
+    rm -rf ${config.xdg.dataHome}/nix-desktop-files/applications
+    mkdir -p ${config.xdg.dataHome}/nix-desktop-files/applications
+    run cp -Lr ${config.home.profileDirectory}/share/applications/* ${config.xdg.dataHome}/nix-desktop-files/applications/
+    run chmod +x ${config.xdg.dataHome}/nix-desktop-files/applications/*.desktop
+  '';
+  
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "divij";
@@ -31,8 +40,8 @@
     pkgs.cliphist # clipboard
     pkgs.lxqt.lxqt-policykit # Authentication
     pkgs.hyprlock # Lock Screen
-    
-    
+
+
     # basic utilities
     # pkgs.neofetch
     pkgs.ntfs3g
@@ -41,16 +50,16 @@
     pkgs.rquickshare
     pkgs.github-desktop # Will try out later
     pkgs.simple-scan
-    
+
     # Media player/audio/image viewer
     pkgs.haruna
     pkgs.easyeffects
-    pkgs.gimp
-    pkgs.blender # Maybe Someday
+    #pkgs.gimp
+    #pkgs.blender # Maybe Someday
 
     # Internet Browser
     pkgs.chromium
-    
+
     # Utilities
     pkgs.digikam
     pkgs.discord
@@ -60,25 +69,26 @@
     pkgs.tree
     pkgs.anydesk
     pkgs.thunderbird
-    
+    #pkgs.sunshine
+
     # Editors/ide
     pkgs.zed-editor
     pkgs.vscode # flatpak implementation
     pkgs.nano
     pkgs.android-studio
-    pkgs.code-cursor
     pkgs.thonny
     pkgs.texliveFull
-    
+
     # Development Platform/Programming Languages
     pkgs.flutter
     pkgs.rustup
     pkgs.cmake
     pkgs.glfw
-    
+
     # Note Making
     pkgs.obsidian
-    
+    pkgs.drawio
+
     # System Monitoring/terminal
     pkgs.btop
     pkgs.wezterm
@@ -87,14 +97,14 @@
     #pkgs.gparted
 
     pkgs.piper
-    
+
     # Password Manager
     pkgs.proton-pass
     pkgs.ente-auth
 
     # Music
-    pkgs.spotify    
-    
+    pkgs.spotify
+
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
