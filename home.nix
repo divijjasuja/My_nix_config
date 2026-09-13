@@ -40,6 +40,9 @@
     pkgs.cliphist # clipboard
     pkgs.lxqt.lxqt-policykit # Authentication
     pkgs.hyprlock # Lock Screen
+    # i have also installed caelestia from aur since i am new to hyprland and youtube suggested it to make it pretty easily
+    # Also hyprmod
+    
 
 
     # basic utilities
@@ -59,6 +62,7 @@
 
     # Internet Browser
     pkgs.chromium
+    pkgs.vivaldi
 
     # Utilities
     pkgs.digikam
@@ -70,6 +74,7 @@
     pkgs.anydesk
     pkgs.thunderbird
     #pkgs.sunshine
+    pkgs.ferdium
 
     # Editors/ide
     pkgs.zed-editor
@@ -95,7 +100,7 @@
     #pkgs.warp-terminal
     pkgs.btop
     #pkgs.gparted
-
+    pkgs.lact
     pkgs.piper
 
     # Password Manager
