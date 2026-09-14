@@ -101,7 +101,15 @@
     pkgs.texliveFull
 
     # Development Platform/Programming Languages
-    pkgs.flutter
+    (pkgs.symlinkJoin {
+          name = "flutter-wrapped";
+          paths = [ pkgs.flutter ];
+          nativeBuildInputs = [ pkgs.makeWrapper ];
+          postBuild = ''
+            wrapProgram $out/bin/flutter \
+              --set-default CHROME_EXECUTABLE ${pkgs.chromium}/bin/chromium
+          '';
+    })
     pkgs.rustup
     pkgs.cmake
     pkgs.glfw
@@ -172,7 +180,6 @@
   home.sessionVariables = {
     # EDITOR = "emacs";
     GTK_USE_PORTAL=1;
-    CHROMIUM_EXECUTABLE="/usr/bin/zenbrowser";
   };
   targets.genericLinux.enable = true;
 
