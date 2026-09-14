@@ -1,14 +1,31 @@
 { config, lib, pkgs, ... }:
 
 {
-  xdg.systemDirs.data = [ "${config.xdg.dataHome}/nix-desktop-files" ];
+  home.activation.linkDesktopApplications =
+    lib.hm.dag.entryAfter [ "writeBoundary" "createXdgUserDirectories" ] ''
+      appdir="${config.xdg.dataHome}/applications"
+      manifest="${config.xdg.dataHome}/nix-desktop-files.manifest"
   
-  home.activation.linkDesktopApplications = lib.hm.dag.entryAfter [ "writeBoundary" "createXdgUserDirectories" ] ''
-    rm -rf ${config.xdg.dataHome}/nix-desktop-files/applications
-    mkdir -p ${config.xdg.dataHome}/nix-desktop-files/applications
-    run cp -Lr ${config.home.profileDirectory}/share/applications/* ${config.xdg.dataHome}/nix-desktop-files/applications/
-    run chmod +x ${config.xdg.dataHome}/nix-desktop-files/applications/*.desktop
-  '';
+      run mkdir -p "$appdir"
+  
+      if [ -f "$manifest" ]; then
+        while IFS= read -r f; do
+          run rm -f "$appdir/$f"
+        done < "$manifest"
+      fi
+      : > "$manifest"
+  
+      for src in ${config.home.profileDirectory}/share/applications/*.desktop; do
+        name=$(basename "$src")
+        run cp -Lf "$src" "$appdir/$name"
+        run chmod 755 "$appdir/$name"
+        echo "$name" >> "$manifest"
+      done
+  
+      run ${pkgs.desktop-file-utils}/bin/update-desktop-database -q "$appdir"
+    '';
+  xdg.enable = true; 
+  xdg.mime.enable = true;
   
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -51,7 +68,7 @@
     pkgs.proton-vpn
     pkgs.uv
     pkgs.rquickshare
-    pkgs.github-desktop # Will try out later
+    pkgs.github-desktop 
     pkgs.simple-scan
 
     # Media player/audio/image viewer
@@ -73,7 +90,6 @@
     pkgs.tree
     pkgs.anydesk
     pkgs.thunderbird
-    #pkgs.sunshine
     pkgs.ferdium
 
     # Editors/ide
@@ -95,9 +111,7 @@
     pkgs.drawio
 
     # System Monitoring/terminal
-    pkgs.btop
     pkgs.wezterm
-    #pkgs.warp-terminal
     pkgs.btop
     #pkgs.gparted
     pkgs.lact
@@ -158,7 +172,7 @@
   home.sessionVariables = {
     # EDITOR = "emacs";
     GTK_USE_PORTAL=1;
-    CHROMIUM_EXECUTABLE="home/divij/.nix-profile/bin/chromium";
+    CHROMIUM_EXECUTABLE="/usr/bin/zenbrowser";
   };
   targets.genericLinux.enable = true;
 
