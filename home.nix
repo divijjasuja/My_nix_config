@@ -5,28 +5,28 @@
     lib.hm.dag.entryAfter [ "writeBoundary" "createXdgUserDirectories" ] ''
       appdir="${config.xdg.dataHome}/applications"
       manifest="${config.xdg.dataHome}/nix-desktop-files.manifest"
-  
+
       run mkdir -p "$appdir"
-  
+
       if [ -f "$manifest" ]; then
         while IFS= read -r f; do
           run rm -f "$appdir/$f"
         done < "$manifest"
       fi
       : > "$manifest"
-  
+
       for src in ${config.home.profileDirectory}/share/applications/*.desktop; do
         name=$(basename "$src")
         run cp -Lf "$src" "$appdir/$name"
         run chmod 755 "$appdir/$name"
         echo "$name" >> "$manifest"
       done
-  
+
       run ${pkgs.desktop-file-utils}/bin/update-desktop-database -q "$appdir"
     '';
-  xdg.enable = true; 
+  xdg.enable = true;
   xdg.mime.enable = true;
-  
+
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "divij";
@@ -39,7 +39,7 @@
   # You should not change this value, even if you update Home Manager. If you do
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
-  home.stateVersion = "25.05"; # Please read the comment before changing.
+  home.stateVersion = "26.05"; # Please read the comment before changing.
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -47,6 +47,7 @@
   nixpkgs.config.allowUnfree = true;
 
   home.packages = [
+    pkgs.nixd
 
     # Hyprland required packages i use
     pkgs.hyprpaper
@@ -57,18 +58,17 @@
     pkgs.cliphist # clipboard
     pkgs.lxqt.lxqt-policykit # Authentication
     pkgs.hyprlock # Lock Screen
-    # i have also installed caelestia from aur since i am new to hyprland and youtube suggested it to make it pretty easily
-    # Also hyprmod
-    
+    # pkgs.hyprmod # settings for hyprland
+
 
 
     # basic utilities
-    # pkgs.neofetch
+    # pkgs.fastfetch
     pkgs.ntfs3g
     pkgs.proton-vpn
     pkgs.uv
     pkgs.rquickshare
-    pkgs.github-desktop 
+    #pkgs.github-desktop
     pkgs.simple-scan
 
     # Media player/audio/image viewer
@@ -89,7 +89,7 @@
     pkgs.kdePackages.okular
     pkgs.tree
     pkgs.anydesk
-    pkgs.thunderbird
+    # pkgs.thunderbird
     pkgs.ferdium
 
     # Editors/ide
@@ -110,7 +110,7 @@
               --set-default CHROME_EXECUTABLE ${pkgs.chromium}/bin/chromium
           '';
     })
-    pkgs.rustup
+    # pkgs.rustup
     pkgs.cmake
     pkgs.glfw
 
