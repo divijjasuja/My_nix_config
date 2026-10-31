@@ -5,23 +5,25 @@
     lib.hm.dag.entryAfter [ "writeBoundary" "createXdgUserDirectories" ] ''
       appdir="${config.xdg.dataHome}/applications"
       manifest="${config.xdg.dataHome}/nix-desktop-files.manifest"
-
+      new=$(mktemp)
+  
       run mkdir -p "$appdir"
-
-      if [ -f "$manifest" ]; then
-        while IFS= read -r f; do
-          run rm -f "$appdir/$f"
-        done < "$manifest"
-      fi
-      : > "$manifest"
-
+  
+      # Copy/overwrite in place (no delete-first gap)
       for src in ${config.home.profileDirectory}/share/applications/*.desktop; do
         name=$(basename "$src")
-        run cp -Lf "$src" "$appdir/$name"
-        run chmod 755 "$appdir/$name"
-        echo "$name" >> "$manifest"
+        run install -m 755 "$src" "$appdir/$name"
+        echo "$name" >> "$new"
       done
-
+  
+      # Remove only entries from apps you uninstalled
+      if [ -f "$manifest" ]; then
+        grep -vxF -f "$new" "$manifest" | while IFS= read -r f; do
+          run rm -f "$appdir/$f"
+        done || true
+      fi
+      run mv "$new" "$manifest"
+  
       run ${pkgs.desktop-file-utils}/bin/update-desktop-database -q "$appdir"
     '';
   xdg.enable = true;
@@ -48,6 +50,7 @@
 
   home.packages = [
     pkgs.nixd
+    pkgs.obs-studio
 
     # Hyprland required packages i use
     pkgs.hyprpaper
@@ -80,17 +83,19 @@
     # Internet Browser
     pkgs.chromium
     pkgs.vivaldi
+    pkgs.brave
 
     # Utilities
     pkgs.digikam
     pkgs.discord
     # pkgs.ollama # for fun
-    pkgs.lmstudio
+    # pkgs.lmstudio
     pkgs.kdePackages.okular
     pkgs.tree
     pkgs.anydesk
     # pkgs.thunderbird
     pkgs.ferdium
+    pkgs.p7zip
 
     # Editors/ide
     pkgs.zed-editor
@@ -145,6 +150,12 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
   ];
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+  };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
